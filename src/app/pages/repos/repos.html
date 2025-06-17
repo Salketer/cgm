@@ -22,19 +22,27 @@
       <!-- Description Column -->
       <ng-container matColumnDef="owner">
         <th mat-header-cell *matHeaderCellDef i18n>Owner</th>
-        <td mat-cell *matCellDef="let repo">{{repo.owner}}</td>
+        <td mat-cell *matCellDef="let repo">
+          <app-avatar url="{{repo.owner.avatar_url}}"></app-avatar
+          >{{repo.owner.login}}
+        </td>
       </ng-container>
 
       <!-- Last Updated Column -->
       <ng-container matColumnDef="createdAt">
         <th mat-header-cell *matHeaderCellDef i18n>Creation date</th>
-        <td mat-cell *matCellDef="let repo">{{repo.createdAt | date}}</td>
+        <td mat-cell *matCellDef="let repo">{{repo.created_at | date}}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="reposColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: reposColumns;"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: reposColumns;"
+        (click)="goToCommits(row.owner.login,row.name)"
+        class="pointer"
+      ></tr>
     </table>
 
-    <mat-paginator showFirstLastButtons></mat-paginator>
+    <mat-paginator #paginator showFirstLastButtons></mat-paginator>
   </div>
 </app-basic-layout>

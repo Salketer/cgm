@@ -7,7 +7,7 @@ export const routes: Routes = [
     title: $localize`Repositories search`,
   },
   {
-    path: 'commits/:repo',
+    path: 'commits/:owner/:repo',
     loadComponent: () =>
       import('./pages/commits/commits').then((m) => m.Commits),
     title: $localize`Repository commits`,
