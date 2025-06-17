@@ -13,6 +13,9 @@
   margin: 0 auto -3em;
   padding-bottom: 3em;
 
+  // prevent margins collapsing between children and body
+  padding-top: 0.02px;
+
   min-height: 100vh;
 
   @media (max-width: $breakpoint-xs) {

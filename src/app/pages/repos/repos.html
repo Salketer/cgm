@@ -1,15 +1,61 @@
 <app-basic-layout>
-  <form class="search-form">
-    <mat-form-field appearance="outline">
-      <mat-label>Search repositories</mat-label>
-      <input
-        matInput
-        [formControl]="searchControl"
-        placeholder="Type to search..."
-      />
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
-  </form>
+  <h2 i18n>Search repositories</h2>
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="searchFormGroup" class="flex gap-4">
+        <mat-form-field appearance="outline" class="flex-grow">
+          <mat-label i18n>Search repositories</mat-label>
+          <input
+            matInput
+            formControlName="term"
+            i18n-placeholder
+            placeholder="Type to search..."
+          />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label i18n>Language</mat-label>
+          <mat-select
+            formControlName="language"
+            i18n-placeholder
+            placeholder="Language"
+          >
+            <mat-option>
+              <input
+                matInput
+                (click)="$event.stopPropagation()"
+                [formControl]="languageFilterCtrl"
+                i18n-placeholder
+                placeholder="Type to search..."
+              />
+            </mat-option>
+
+            <mat-option
+              *ngFor="let language of filteredLanguages | async"
+              [value]="language.name"
+            >
+              <span
+                class="language-icon"
+                [ngStyle]="{backgroundColor:'#'+language.color}"
+              ></span>
+              {{language.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label i18n>Minimum stars</mat-label>
+          <input
+            matInput
+            formControlName="stars"
+            i18n-placeholder
+            placeholder="Type to search..."
+          />
+          <mat-icon matSuffix>star</mat-icon>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  </mat-card>
 
   <div class="table-container">
     <table mat-table [dataSource]="reposDatasource" class="mat-elevation-z8">
