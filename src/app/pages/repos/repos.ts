@@ -4,9 +4,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-repos',
   imports: [],
   templateUrl: './repos.html',
-  styleUrl: './repos.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './repos.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Repos {
-
-}
+export class Repos {}

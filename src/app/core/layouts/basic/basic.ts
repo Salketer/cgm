@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-basic',
   imports: [],
   templateUrl: './basic.html',
-  styleUrl: './basic.css',
+  styleUrl: './basic.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicLayout {}

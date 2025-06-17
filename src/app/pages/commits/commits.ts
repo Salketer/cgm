@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-commits',
   imports: [],
   templateUrl: './commits.html',
-  styleUrl: './commits.css',
+  styleUrl: './commits.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Commits implements OnInit {
