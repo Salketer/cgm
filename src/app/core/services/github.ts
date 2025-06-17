@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class Github {
+export class GithubService {
   constructor() {}
 
   getCommits() {
@@ -11,7 +12,7 @@ export class Github {
     throw new Error('Method not implemented.');
   }
 
-  searchRepositories() {
+  searchRepositories(term: string): Observable<any[]> {
     // This method would typically make an HTTP request to search repositories
     throw new Error('Method not implemented.');
   }
