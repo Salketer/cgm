@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Octokit } from 'octokit';
 import {
   catchError,
+  forkJoin,
   map,
   merge,
   Observable,
@@ -63,94 +64,8 @@ export interface RepositoryModel {
   forks_count: number;
   open_issues_count: number;
   master_branch?: string;
-  default_branch: string;
-  score: number;
-  forks_url: string;
-  keys_url: string;
-  collaborators_url: string;
-  teams_url: string;
-  hooks_url: string;
-  issue_events_url: string;
-  events_url: string;
-  assignees_url: string;
-  branches_url: string;
-  tags_url: string;
-  blobs_url: string;
-  git_tags_url: string;
-  git_refs_url: string;
-  trees_url: string;
-  statuses_url: string;
-  languages_url: string;
-  stargazers_url: string;
-  contributors_url: string;
-  subscribers_url: string;
-  subscription_url: string;
-  commits_url: string;
-  git_commits_url: string;
-  comments_url: string;
-  issue_comment_url: string;
-  contents_url: string;
-  compare_url: string;
-  merges_url: string;
-  archive_url: string;
-  downloads_url: string;
-  issues_url: string;
-  pulls_url: string;
-  milestones_url: string;
-  notifications_url: string;
-  labels_url: string;
-  releases_url: string;
-  deployments_url: string;
-  git_url: string;
-  ssh_url: string;
-  clone_url: string;
-  svn_url: string;
-  forks: number;
-  open_issues: number;
-  watchers: number;
-  topics?: string[];
-  mirror_url: string | null;
-  has_issues: boolean;
-  has_projects: boolean;
-  has_pages: boolean;
-  has_wiki: boolean;
-  has_downloads: boolean;
-  has_discussions?: boolean;
-  archived: boolean;
-  disabled: boolean;
-  visibility?: string;
-  license: {
-    key: string;
-    name: string;
-    url: string | null;
-    spdx_id: string | null;
-    node_id: string;
-    html_url?: string;
-  } | null;
-  permissions?: {
-    admin: boolean;
-    maintain?: boolean;
-    push: boolean;
-    triage?: boolean;
-    pull: boolean;
-  };
-  text_matches?: {
-    object_url?: string;
-    object_type?: string | null;
-    property?: string;
-    fragment?: string;
-    matches?: { text?: string; indices?: number[] }[];
-  }[];
-  temp_clone_token?: string;
-  allow_merge_commit?: boolean;
-  allow_squash_merge?: boolean;
-  allow_rebase_merge?: boolean;
-  allow_auto_merge?: boolean;
-  delete_branch_on_merge?: boolean;
-  allow_forking?: boolean;
-  is_template?: boolean;
-  web_commit_signoff_required?: boolean;
 }
+
 @Injectable({
   providedIn: 'root',
 })
@@ -159,13 +74,46 @@ export class GithubService {
   private octokit = inject(OctokitClient);
   constructor() {}
 
-  getCommits() {
-    // This method would typically make an HTTP request to fetch commits
-    throw new Error('Method not implemented.');
+  getCommits(owner: string, repo: string) {
+    const req = this.octokit.request('GET /repos/{owner}/{repo}/commits', {
+      owner,
+      repo,
+      per_page: 100, // GitHub API allows up to 100 commits per page
+    });
+    return fromPromise(req.then((response) => response.data));
+  }
+
+  getRepository(owner: string, repo: string): Observable<RepositoryModel> {
+    const req = this.octokit.request('GET /repos/{owner}/{repo}', {
+      owner,
+      repo,
+    });
+    return fromPromise(req.then((response) => response.data));
   }
 
   searchRepositories(
     search: {
+      searchType?: 'repositories' | 'issues';
+      term?: string;
+      stars?: number | null;
+      language?: string | null;
+    },
+    page: number = 1,
+    perPage: number = 10
+  ): Observable<GitHubResults<RepositoryModel>> {
+    switch (search.searchType) {
+      case 'repositories':
+      default:
+        return this._getRepositoriesFromRepository(search, page, perPage);
+      case 'issues':
+        return this._getRepositoriesFromIssues(search, page, perPage);
+        break;
+    }
+  }
+
+  private _getRepositoriesFromRepository(
+    search: {
+      searchType?: 'repositories' | 'issues';
       term?: string;
       stars?: number | null;
       language?: string | null;
@@ -186,6 +134,47 @@ export class GithubService {
       per_page: perPage,
     });
     return fromPromise(req.then((response) => response.data));
+  }
+
+  private _getRepositoriesFromIssues(
+    search: {
+      searchType?: 'repositories' | 'issues';
+      term?: string;
+      stars?: number | null;
+      language?: string | null;
+    },
+    page: number = 1,
+    perPage: number = 10
+  ): Observable<GitHubResults<RepositoryModel>> {
+    let query = search.term ?? '';
+
+    const req = this.octokit.request('GET /search/issues', {
+      // is:issue will become mandatory in september 2025
+      q: query + ' is:issue',
+      page: page,
+      per_page: perPage,
+    });
+    return fromPromise(req).pipe(
+      switchMap((response) => {
+        return forkJoin(
+          response.data.items.map((item) =>
+            // For each issue, we need to fetch the repository details
+            // because the search/issues endpoint does not return the repository details.
+            fromPromise(
+              this.octokit
+                .request(`GET ${item.repository_url}`)
+                .then((repoResponse) => repoResponse.data)
+            )
+          )
+        ).pipe(
+          map((items) => ({
+            total_count: response.data.total_count,
+            incomplete_results: response.data.incomplete_results,
+            items: items as RepositoryModel[],
+          }))
+        );
+      })
+    );
   }
 
   // Retrieves a list of available programming languages from text file

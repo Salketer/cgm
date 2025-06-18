@@ -1,1 +1,46 @@
-<p>commits works!</p>
+<app-basic-layout>
+  @if(repoName$ | async; as repoName) {
+  <h2 i18n>Commits for {{repoName.owner}}/{{repoName.repo}}</h2>
+  }
+
+  <mat-form-field appearance="outline" class="pull-right">
+    <mat-label i18n>Search messages</mat-label>
+    <input
+      matInput
+      [formControl]="searchControl"
+      i18n-placeholder
+      placeholder="Type to search..."
+    />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="commitsDatasource" class="mat-elevation-z8">
+      <!-- Repository Name Column -->
+      <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef i18n>Author</th>
+        <td mat-cell *matCellDef="let commit">
+          <app-github-profile [profile]="commit.author"></app-github-profile>
+        </td>
+      </ng-container>
+
+      <!-- Description Column -->
+      <ng-container matColumnDef="url">
+        <th mat-header-cell *matHeaderCellDef i18n>SHA</th>
+        <td mat-cell *matCellDef="let commit">
+          <a href="{{commit.html_url}}">{{commit.sha}}</a>
+        </td>
+      </ng-container>
+
+      <!-- Last Updated Column -->
+      <ng-container matColumnDef="message">
+        <th mat-header-cell *matHeaderCellDef i18n>Commit message</th>
+        <td mat-cell *matCellDef="let commit">{{commit.commit.message}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="commitsColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: commitsColumns;"></tr>
+    </table>
+  </div>
+  <p><em i18n>Only the 100 most recent commits are displayed.</em></p>
+</app-basic-layout>

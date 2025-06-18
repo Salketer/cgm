@@ -41,6 +41,8 @@ import {
   MatProgressSpinner,
   MatSpinner,
 } from '@angular/material/progress-spinner';
+import { GithubProfile } from '../../components/github-profile/github-profile';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-repos',
@@ -51,12 +53,13 @@ import {
     MatPaginator,
     DatePipe,
     BasicLayout,
-    Avatar,
     MatIconModule,
     MatSelectModule,
     CommonModule,
     MatCardModule,
     MatProgressSpinner,
+    GithubProfile,
+    MatButtonToggleModule,
   ],
   templateUrl: './repos.html',
   styleUrl: './repos.scss',
@@ -88,6 +91,9 @@ export class Repos {
   );
 
   protected readonly searchFormGroup = new FormGroup({
+    searchType: new FormControl<'repositories' | 'issues'>('repositories', {
+      nonNullable: true,
+    }),
     term: new FormControl('', { nonNullable: true }),
     stars: new FormControl(null, Validators.min(0)),
     language: new FormControl(''),

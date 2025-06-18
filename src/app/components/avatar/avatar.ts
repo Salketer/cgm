@@ -8,5 +8,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Avatar {
-  @Input() url: string = '';
+  @Input() url?: string;
 }
