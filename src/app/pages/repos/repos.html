@@ -47,7 +47,7 @@
             @for(language of filteredLanguages | async; track language.name) {
             <mat-option [value]="language.name">
               <span
-                class="language-icon"
+                class="language-icon round"
                 [ngStyle]="{backgroundColor:'#'+language.color}"
               ></span>
               {{language.name}}
