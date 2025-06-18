@@ -19,10 +19,20 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "fr-FR": {
+            "translation": "src/locale/messages.fr.xlf"
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "localize": true,
+            "i18nMissingTranslation": "error",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
