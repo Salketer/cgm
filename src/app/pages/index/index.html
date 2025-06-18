@@ -1,0 +1,22 @@
+<app-basic-layout>
+  <h1 i18n>Welcome to the GitHub browser App!</h1>
+  <p i18n>
+    This is a simple app to browse GitHub repositories and their commits. It
+    uses the GitHub API to fetch data. You can search for repositories, view
+    their commits, and see the commit history. The app is built with Angular and
+    uses Material Design for the UI. The source code is available on
+    <a href="https://github.com/Salketer/cgm">GitHub</a>
+  </p>
+  <form class="flex" (submit)="searchRepositories()">
+    <mat-form-field appearance="fill" class="flex-grow">
+      <input
+        matInput
+        [(ngModel)]="searchTerm"
+        i18n-placeholder
+        placeholder="Start searching..."
+        name="searchTerm"
+      />
+      <mat-icon matSuffix>arrow_forward</mat-icon>
+    </mat-form-field>
+  </form>
+</app-basic-layout>

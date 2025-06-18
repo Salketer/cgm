@@ -76,4 +76,8 @@ export class Commits {
       );
     })
   );
+
+  goBack() {
+    window.history.back();
+  }
 }

@@ -1,6 +1,9 @@
 <app-basic-layout>
   @if(repoName$ | async; as repoName) {
-  <h2 i18n>Commits for {{repoName.owner}}/{{repoName.repo}}</h2>
+  <h2 i18n>
+    <mat-icon class="pointer" (click)="goBack()">arrow_back</mat-icon> Commits
+    for {{repoName.owner}}/{{repoName.repo}}
+  </h2>
   }
 
   <mat-form-field appearance="outline" class="pull-right">

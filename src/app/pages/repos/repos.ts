@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -20,17 +15,14 @@ import {
 } from 'rxjs/operators';
 import { inject } from '@angular/core';
 import {
-  GitHubDataSource,
   GitHubRepositoriesDataSource,
   GithubService,
-  RepositoryModel,
 } from '../../core/services/github';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator } from '@angular/material/paginator';
 import { CommonModule, DatePipe } from '@angular/common';
 import { BasicLayout } from '../../core/layouts/basic/basic';
-import { Avatar } from '../../components/avatar/avatar';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
@@ -90,10 +82,12 @@ export class Repos {
     })
   );
 
+  protected readonly searchTypeControl = new FormControl<
+    'repositories' | 'users'
+  >('repositories', { nonNullable: true });
+
   protected readonly searchFormGroup = new FormGroup({
-    searchType: new FormControl<'repositories' | 'issues'>('repositories', {
-      nonNullable: true,
-    }),
+    searchType: this.searchTypeControl,
     term: new FormControl('', { nonNullable: true }),
     stars: new FormControl(null, Validators.min(0)),
     language: new FormControl(''),
@@ -117,6 +111,19 @@ export class Repos {
   }
 
   constructor() {
+    this.searchTypeControl.valueChanges
+      .pipe(takeUntilDestroyed())
+      .subscribe((searchType) => {
+        if (searchType === 'repositories') {
+          this.searchFormGroup.get('stars')?.enable();
+          this.searchFormGroup.get('language')?.enable();
+        } else {
+          this.searchFormGroup.get('stars')?.disable();
+          this.searchFormGroup.get('language')?.disable();
+        }
+      });
+    // Reset the search term when the search type changes
+
     this.searchFormGroup.valueChanges
       .pipe(
         // Make sure the form is valid before proceeding
@@ -127,7 +134,24 @@ export class Repos {
         takeUntilDestroyed()
       )
       .subscribe((searchValue) => {
-        this.reposDatasource.setSearch(searchValue);
+        // We are only chaging the query params instead of calling the search directly.
+        // The router state change will tigger it, this allows for history navigation to work properly.
+        this.router.navigate([], {
+          queryParams: searchValue,
+        });
+      });
+
+    this.router.routerState.root.queryParams
+      .pipe(
+        // ensure we get the initial query params
+        startWith(this.router.routerState.snapshot.root.queryParams),
+        takeUntilDestroyed()
+      )
+      .subscribe((queryParams) => {
+        // Make sure the search form is updated with the current query params
+        // This is useful when the user navigates back to this page with query params already set
+        this.searchFormGroup.patchValue(queryParams, { emitEvent: false });
+        this.reposDatasource.setSearch(queryParams);
       });
   }
 }
