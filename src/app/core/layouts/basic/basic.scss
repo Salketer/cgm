@@ -1,14 +1,10 @@
 .content {
   // Breakpoint variables
-  $breakpoint-xs: 480px;
-  $breakpoint-sm: 768px;
-  $breakpoint-md: 992px;
-  $breakpoint-lg: 1200px;
-  $breakpoint-xl: 1400px;
-
-  // Width styles at different breakpoints
-  width: 100%;
-  max-width: 1400px;
+  // Taken from https://m2.material.io/design/layout/responsive-layout-grid.html#breakpoints
+  $breakpoint-xs: 599px;
+  $breakpoint-sm: 904px;
+  $breakpoint-md: 1239px;
+  $breakpoint-lg: 1439px;
 
   margin: 0 auto -3em;
   padding-bottom: 3em;
@@ -18,23 +14,31 @@
 
   min-height: 100vh;
 
+  // XS devices (phone)
   @media (max-width: $breakpoint-xs) {
-    width: $breakpoint-xs;
+    margin-left: 16px;
+    margin-right: 16px;
   }
 
-  @media (min-width: $breakpoint-sm) {
-    width: $breakpoint-sm;
+  // SM devices (small tablet)
+  @media (min-width: $breakpoint-xs) and (max-width: $breakpoint-sm) {
+    margin-left: 32px;
+    margin-right: 32px;
   }
 
-  @media (min-width: $breakpoint-md) {
-    width: $breakpoint-md;
+  // MD devices (tablet)
+  @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
+    width: 840px;
   }
 
+  // LG devices (laptop)
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg) {
+    margin-left: 200px;
+    margin-right: 200px;
+  }
+
+  // XL devices (desktop
   @media (min-width: $breakpoint-lg) {
-    width: $breakpoint-lg;
-  }
-
-  @media (min-width: $breakpoint-xl) {
-    width: $breakpoint-xl;
+    width: 1040px;
   }
 }

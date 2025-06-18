@@ -59,11 +59,16 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 })
 export class Repos {
   private githubService = inject(GithubService);
-
   private router = inject(Router);
 
+  /**
+   * Used to filter the available languages.
+   */
   languageFilterCtrl = new FormControl<string | null>('');
 
+  /**
+   * Provides a filtered list of languages based on input.
+   */
   protected readonly filteredLanguages = combineLatest({
     filterValue: this.languageFilterCtrl.valueChanges.pipe(startWith('')),
     availableLanguages: this.githubService.getAvailableLanguages(),
@@ -74,7 +79,6 @@ export class Repos {
       if (!filterValue || filterValue.trim() === '') {
         return availableLanguages;
       }
-
       const searchLower = filterValue.toLowerCase();
       return availableLanguages.filter((language) =>
         language.name.toLowerCase().includes(searchLower)
@@ -103,8 +107,6 @@ export class Repos {
   }
 
   protected reposColumns = ['name', 'owner', 'createdAt'];
-  loading = signal<boolean>(false);
-  error = signal<string | null>(null);
 
   goToCommits(owner: string, repo: string): void {
     this.router.navigate(['/commits', owner, repo]);
@@ -114,13 +116,7 @@ export class Repos {
     this.searchTypeControl.valueChanges
       .pipe(takeUntilDestroyed())
       .subscribe((searchType) => {
-        if (searchType === 'repositories') {
-          this.searchFormGroup.get('stars')?.enable();
-          this.searchFormGroup.get('language')?.enable();
-        } else {
-          this.searchFormGroup.get('stars')?.disable();
-          this.searchFormGroup.get('language')?.disable();
-        }
+        // Only the repositories search type can make use of the stars and language filters.
       });
     // Reset the search term when the search type changes
 
@@ -150,6 +146,13 @@ export class Repos {
       .subscribe((queryParams) => {
         // Make sure the search form is updated with the current query params
         // This is useful when the user navigates back to this page with query params already set
+        if (queryParams['searchType'] === 'repositories') {
+          this.searchFormGroup.get('stars')?.enable({ emitEvent: false });
+          this.searchFormGroup.get('language')?.enable({ emitEvent: false });
+        } else {
+          this.searchFormGroup.get('stars')?.disable({ emitEvent: false });
+          this.searchFormGroup.get('language')?.disable({ emitEvent: false });
+        }
         this.searchFormGroup.patchValue(queryParams, { emitEvent: false });
         this.reposDatasource.setSearch(queryParams);
       });

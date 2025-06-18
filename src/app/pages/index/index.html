@@ -16,7 +16,9 @@
         placeholder="Start searching..."
         name="searchTerm"
       />
-      <mat-icon matSuffix>arrow_forward</mat-icon>
+      <mat-icon matSuffix (click)="searchRepositories()"
+        >arrow_forward</mat-icon
+      >
     </mat-form-field>
   </form>
 </app-basic-layout>

@@ -14,6 +14,10 @@ import { Avatar } from '../avatar/avatar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GithubProfile {
+  /**
+   * The GitHub profile object t'o display.
+   * If not provided, the component will render default information.
+   */
   @Input() profile?: {
     login: string;
     avatar_url: string;

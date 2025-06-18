@@ -8,5 +8,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Avatar {
+  /**
+   * The absolute URL of the avatar image.
+   * If not provided, a default avatar will be used.
+   *  */
   @Input() url?: string;
 }

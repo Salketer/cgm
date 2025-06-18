@@ -42,18 +42,17 @@
                 i18n-placeholder
                 placeholder="Type to search..."
               />
+              <!-- stopPropagation is needed or the click into the input would close the select menu -->
             </mat-option>
-
-            <mat-option
-              *ngFor="let language of filteredLanguages | async"
-              [value]="language.name"
-            >
+            @for(language of filteredLanguages | async; track language.name) {
+            <mat-option [value]="language.name">
               <span
                 class="language-icon"
                 [ngStyle]="{backgroundColor:'#'+language.color}"
               ></span>
               {{language.name}}
             </mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline">
@@ -78,21 +77,18 @@
     @if(reposDatasource.loading()){
     <div class="overlay absolute">
       <mat-spinner
-        *ngIf="loading"
         class="absolute-center"
         diameter="50"
         mode="indeterminate"
       ></mat-spinner>
     </div>
     }
-    <table mat-table [dataSource]="reposDatasource" class="mat-elevation-z8">
-      <!-- Repository Name Column -->
+    <table mat-table [dataSource]="reposDatasource">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef i18n>Repository name</th>
         <td mat-cell *matCellDef="let repo">{{repo.name}}</td>
       </ng-container>
 
-      <!-- Description Column -->
       <ng-container matColumnDef="owner">
         <th mat-header-cell *matHeaderCellDef i18n>Owner</th>
         <td mat-cell *matCellDef="let repo">
@@ -100,7 +96,6 @@
         </td>
       </ng-container>
 
-      <!-- Last Updated Column -->
       <ng-container matColumnDef="createdAt">
         <th mat-header-cell *matHeaderCellDef i18n>Creation date</th>
         <td mat-cell *matCellDef="let repo">{{repo.created_at | date}}</td>

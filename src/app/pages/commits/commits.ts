@@ -59,6 +59,7 @@ export class Commits {
     ),
     switchMap((commits) => {
       return this.searchControl.valueChanges.pipe(
+        // Start with the current value of the search control to make sure the list is displayed on initial load
         startWith(this.searchControl.value),
         debounceTime(75),
         map((searchTerm) => {
