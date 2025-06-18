@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en-US" target-language="fr" datatype="plaintext" original="ng2.template">
+		<body>
+			<trans-unit id="6208857827290909716" datatype="html">
+				<source>
+					Repositories search
+				</source>
+				<target>
+					Recherche de dépôts
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/app.routes.ts
+					</context>
+					<context context-type="linenumber">
+						11
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="3012013442427160287" datatype="html">
+				<source>
+					Repository commits
+				</source>
+				<target>
+					Commits du dépôt
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/app.routes.ts
+					</context>
+					<context context-type="linenumber">
+						17
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="2392656793921585134" datatype="html">
+				<source>
+					GitHub-Browser
+				</source>
+				<target>
+					Navigateur GitHub
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/app.ts
+					</context>
+					<context context-type="linenumber">
+						11
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="3273066374704987494" datatype="html">
+				<source>
+					<x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;pointer&quot; (click)=&quot;goBack()&quot;&gt;" />
+					arrow_back
+					<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" />
+					Commits for
+					<x id="INTERPOLATION" equiv-text="{{repoName.owner}}" />
+					/
+					<x id="INTERPOLATION_1" equiv-text="{{repoName.repo}}" />
+				</source>
+				<target>
+					<x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;pointer&quot; (click)=&quot;goBack()&quot;&gt;" />
+					arrow_back
+					<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" />
+					Commits pour
+					<x id="INTERPOLATION" equiv-text="{{repoName.owner}}" />
+					/
+					<x id="INTERPOLATION_1" equiv-text="{{repoName.repo}}" />
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/commits/commits.html
+					</context>
+					<context context-type="linenumber">
+						4,9
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="2800386152002621063" datatype="html">
+				<source>
+					Search messages
+				</source>
+				<target>
+					Rechercher des messages
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/commits/commits.html
+					</context>
+					<context context-type="linenumber">
+						10
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="4248575180071101156" datatype="html">
+				<source>
+					Type to search...
+				</source>
+				<target>
+					Tapez pour rechercher...
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/commits/commits.html
+					</context>
+					<context context-type="linenumber">
+						15,17
+					</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/repos/repos.html
+					</context>
+					<context context-type="linenumber">
+						25,26
+					</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/repos/repos.html
+					</context>
+					<context context-type="linenumber">
+						43,44
+					</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/repos/repos.html
+					</context>
+					<context context-type="linenumber">
+						65,66
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="7071470734400948493" datatype="html">
+				<source>
+					Author
+				</source>
+				<target>
+					Auteur
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/commits/commits.html
+					</context>
+					<context context-type="linenumber">
+						24,25
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="707633568484716599" datatype="html">
+				<source>
+					SHA
+				</source>
+				<target>
+					SHA
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/commits/commits.html
+					</context>
+					<context context-type="linenumber">
+						33
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="1774502156966361950" datatype="html">
+				<source>
+					Commit message
+				</source>
+				<target>
+					Message de commit
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/commits/commits.html
+					</context>
+					<context context-type="linenumber">
+						40,41
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="7710451627435097538" datatype="html">
+				<source>
+					Only the 100 most recent commits are displayed.
+				</source>
+				<target>
+					Seuls les 100 commits les plus récents sont affichés.
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/commits/commits.html
+					</context>
+					<context context-type="linenumber">
+						48,49
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="5383040138200040522" datatype="html">
+				<source>
+					Welcome to the GitHub browser App!
+				</source>
+				<target>
+					Bienvenue dans l'application navigateur GitHub !
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/index/index.html
+					</context>
+					<context context-type="linenumber">
+						2,3
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="6385815789164457754" datatype="html">
+				<source>
+					This is a simple app to browse GitHub repositories and their commits. It uses the GitHub API to fetch data. You can search for repositories, view their commits, and see the commit history. The app is built with Angular and uses Material Design for the UI. The source code is available on
+					<x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://github.com/Salketer/cgm&quot;&gt;" />
+					GitHub
+					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;" />
+				</source>
+				<target>
+					C'est une application simple pour parcourir les dépôts GitHub et leurs commits. Elle utilise l'API GitHub pour récupérer les données. Vous pouvez rechercher des dépôts, consulter leurs commits et voir l'historique des commits. L'application est construite avec Angular et utilise Material Design pour l'interface utilisateur. Le code source est disponible sur
+					<x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://github.com/Salketer/cgm&quot;&gt;" />
+					GitHub
+					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;" />
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/index/index.html
+					</context>
+					<context context-type="linenumber">
+						4,10
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="66281573421931092" datatype="html">
+				<source>
+					Start searching...
+				</source>
+				<target>
+					Commencer la recherche...
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/index/index.html
+					</context>
+					<context context-type="linenumber">
+						16,17
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="254383123577192327" datatype="html">
+				<source>
+					Search repositories
+				</source>
+				<target>
+					Rechercher des dépôts
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/repos/repos.html
+					</context>
+					<context context-type="linenumber">
+						2,3
+					</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/repos/repos.html
+					</context>
+					<context context-type="linenumber">
+						20
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="7910685886263418655" datatype="html">
+				<source>
+					Search texts from
+				</source>
+				<target>
+					Rechercher des textes depuis
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/repos/repos.html
+					</context>
+					<context context-type="linenumber">
+						6,7
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="3305829793924000785" datatype="html">
+				<source>
+					Repositories
+				</source>
+				<target>
+					Dépôts
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/repos/repos.html
+					</context>
+					<context context-type="linenumber">
+						13
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="1176990449799757498" datatype="html">
+				<source>
+					Issues
+				</source>
+				<target>
+					Problèmes
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/repos/repos.html
+					</context>
+					<context context-type="linenumber">
+						15
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="2826581353496868063" datatype="html">
+				<source>
+					Language
+				</source>
+				<target>
+					Langage
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/repos/repos.html
+					</context>
+					<context context-type="linenumber">
+						31
+					</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/repos/repos.html
+					</context>
+					<context context-type="linenumber">
+						35,36
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="3359553236127297446" datatype="html">
+				<source>
+					Minimum stars
+				</source>
+				<target>
+					Étoiles minimum
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/repos/repos.html
+					</context>
+					<context context-type="linenumber">
+						60
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="4099274713587184153" datatype="html">
+				<source>
+					An error occured, please retry.
+				</source>
+				<target>
+					Une erreur est survenue, veuillez réessayer.
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/repos/repos.html
+					</context>
+					<context context-type="linenumber">
+						74,77
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="798054199038931083" datatype="html">
+				<source>
+					Repository name
+				</source>
+				<target>
+					Nom du dépôt
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/repos/repos.html
+					</context>
+					<context context-type="linenumber">
+						91,92
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="3715596725146409911" datatype="html">
+				<source>
+					Owner
+				</source>
+				<target>
+					Propriétaire
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/repos/repos.html
+					</context>
+					<context context-type="linenumber">
+						97,98
+					</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="2275532246801944011" datatype="html">
+				<source>
+					Creation date
+				</source>
+				<target>
+					Date de création
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/pages/repos/repos.html
+					</context>
+					<context context-type="linenumber">
+						105,106
+					</context>
+				</context-group>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
